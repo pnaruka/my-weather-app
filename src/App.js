@@ -2,43 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Weather from "./Weather";
 import './App.css'
-import { createClient } from 'pexels';
 import Aqi from "./Aqi";
-import Spinner from "./Spinner";
 
 const API_URL = `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}`;
-const client = createClient(process.env.REACT_APP_IMG_API);
-//const query = 'Nature';
 
 function App() {
     const [currentCity, setCurrentCity] = useState('');
     const [currentWeather, setCurrentWeather] = useState({});
-    const [currentImage, setCurrentImage] = useState({});
     const [aqi, setAqi] = useState('yes');
-    const [imgLoading, setImgLoading] = useState(false);
-
-    useEffect(() => {
-        async function fetchImage() {
-            let query;
-            if (currentWeather.text) {
-                query = currentWeather.text + " weather";
-                setImgLoading(true);
-                const image_res = await client.photos.search({ query, per_page: 5, orientation: 'square' });
-                const photos = image_res.photos;
-                const data = photos[Math.floor((Math.random() * photos.length))];
-                console.log(query);
-                console.log(data);
-                const image = {
-                    "alt": data.alt,
-                    "src": data.src.original
-                }
-                //console.log(image);
-                setCurrentImage(image);
-                setImgLoading(false);
-            }
-
-        } fetchImage();
-    }, [currentWeather]);
 
     useEffect(() => {
         if (aqi === 'no')
@@ -111,16 +82,6 @@ function App() {
                 </div>
 
 
-            </div>
-            <div id="imgContainer" className="imgContainer">
-                {
-                    imgLoading ? (
-                        <Spinner />
-                    ) : (
-                        <img id="weatherImage" className="weatherImage" alt={currentImage.alt} src={currentImage.src} />
-                    )
-                }
-                
             </div>
         </div>
     )
