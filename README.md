@@ -32,7 +32,7 @@ Install dependencies: `npm install`
 After installation, you can use the project as follows:
 
 Run the project: `npm start`\
-Access the application through your web browser at `http://localhost:3000` \
+Access the application through your web browser at `http://localhost:3000`
 
 ## Screenshots <a name="screenshots"></a>:
 `With AQI`: ![With AQI](screenshots/withAqi.png) \
